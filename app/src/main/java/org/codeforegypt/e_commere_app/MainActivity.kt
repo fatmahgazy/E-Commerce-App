@@ -11,24 +11,25 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import org.codeforegypt.e_commere_app.ui.screens.SignupScreen
 import org.codeforegypt.e_commere_app.ui.theme.ECommereAppTheme
+import org.codeforegypt.e_commere_app.viewmodel.SignupViewModel
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            ECommereAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+        val viewModel : SignupViewModel = hiltViewModel()
+                SignupScreen(viewModel)
+
             }
         }
     }
-}
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
