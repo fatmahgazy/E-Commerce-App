@@ -2,29 +2,32 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "org.codeforegypt.e_commere_app"
-    compileSdk = 34
+    compileSdk = 35
 
+    packaging {
+        resources {
+            excludes += "META-INF/INDEX.LIST"
+        }
+    }
     defaultConfig {
         applicationId = "org.codeforegypt.e_commere_app"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -40,7 +43,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -58,13 +60,19 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    //Material
+    implementation (libs.androidx.material)
 
-//    App ( UI )
-//    compose ( constraint layout )
-//    Navigation component
-//    Glide / Koil
-//    coroutiens
-//    Hilt
-//    MVVM
-
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+    // Coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+    // Coroutine
+    implementation(libs.kotlinx.coroutines.android)
+    // Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    //Hilt for viewmodel
+    implementation(libs.androidx.hilt.navigation.compose)
 }

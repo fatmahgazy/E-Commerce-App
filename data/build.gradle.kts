@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -38,14 +40,22 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(project(":domain"))
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    //retrofit
+    implementation(libs.retrofit)
+    //Gson converter
+    implementation(libs.converter.gson)
+    //logging interceptor
+    implementation(libs.logging.interceptor)
+    //Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    //Data Store
+    implementation(libs.androidx.datastore.preferences)
+    //Room DB
+    implementation(libs.androidx.room.runtime)
+     implementation(libs.androidx.room.ktx)
+    //coroutine
+    implementation(libs.kotlinx.coroutines.android)
 
-//    Data Layer ( Core ):
-//    retrofit - Gson converter - logging interceptor
-//    Hilt
-//    Data Store
-//    Room DB
-//    coroutiens
 }
